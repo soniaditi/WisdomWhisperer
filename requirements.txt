@@ -1,0 +1,9 @@
+transformers -offline
+torch
+streamlit
+langchain
+sentence_transformers
+transformers accelerate langchain==0.0.263 tiktoken huggingface_hub sentence_transformers chromadb==0.4.5 openai==0.27.8
+chromadb
+nltk
+pyspellchecker
