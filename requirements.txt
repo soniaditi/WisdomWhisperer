@@ -1,4 +1,4 @@
-transformers -offline
+transformers 
 torch
 streamlit
 langchain
