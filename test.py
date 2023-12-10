@@ -53,7 +53,7 @@ def classify_end_continue(prompt):
     return response.json()
 
 def classify_wiki_chat(prompt):
-    url = "http://34.82.173.246:5000/classify_wiki_chat"
+    url = "http://34.145.118.86:5000/classify_wiki_chat"
     data = {"prompt": prompt}
     response = requests.post(url, json=data)
     return response.json()
@@ -64,28 +64,7 @@ def chatterbot_response(prompt):
     response = requests.post(url, json=data)
     return response.json()
 
-# def on_send():
-#     user_input = st.session_state.user_input.strip()
-#     if user_input:
-#         end_continue_response = classify_end_continue(user_input)
-#         if end_continue_response['output'] == 'continue chat':
-#             wiki_chat_response = classify_wiki_chat(user_input)
-#             if wiki_chat_response['output'] == 'wiki':
-#                 preprocessed_query = preprocess_query(user_input)
-#                 results = search_solr(preprocessed_query, 'http://35.245.97.133:8983/solr/IRF23P1', 'topic,title,revision_id,summary')
-#                 if 'response' in results and 'docs' in results['response'] and results['response']['docs']:
-#                     latest_doc = results['response']['docs'][-1]
-#                     response = latest_doc.get('summary', 'Summary not available.')
-#                 else:
-#                     response = "I couldn't find any information on that topic."
-#             elif wiki_chat_response['output'] == 'chat':
-#                 response = chatterbot_response(user_input)
-#         elif end_continue_response['output'] == 'bye':
-#             response = "Goodbye! Chat with you later!"
-#         else:
-#             response = "I'm not sure how to respond to that."
 
-#         update_chat_history(user_input, response)
         
 def on_send():
     user_input = st.session_state.user_input.strip()
@@ -107,8 +86,9 @@ def on_send():
 
             elif wiki_chat_response['output'] == 'chat':
                 response = chatterbot_response(user_input)
+                print(response)
         elif end_continue_response['output'] == 'bye':
-            response = "Goodbye! Chat with you later!"
+            response = chatterbot_response(user_input)
         else:
             response = "I'm not sure how to respond to that."
 
