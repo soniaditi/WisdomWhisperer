@@ -3,3 +3,7 @@ torch
 streamlit
 nltk
 pyspellchecker
+openai
+langchain
+chromadb
+sentence_transformers
