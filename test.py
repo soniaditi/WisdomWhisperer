@@ -5,7 +5,9 @@ import torch
 import csv
 from datetime import datetime
 import time  # Add this import at the beginning of your script
-
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import os
 import requests
@@ -190,10 +192,10 @@ def on_send():
                 if 'response' in results and 'docs' in results['response'] and len(results['response']['docs']) > 0:
                     latest_doc = results['response']['docs'][0]
                     response = latest_doc.get('summary', 'Summary not available.')
-                    # data = results['response']['docs']
-                    # resulting_file = write_to_file(data)
-                    # vectordb=initialize_huggingface_components(resulting_file)
-                    # response=get_openai_key_and_answer(user_input, vectordb)
+                    data = results['response']['docs']
+                    resulting_file = write_to_file(data)
+                    vectordb=initialize_huggingface_components(resulting_file)
+                    response=get_openai_key_and_answer(user_input, vectordb)
                     #response = latest_doc.get('summary', 'Summary not available.')
                     #update_chat_history(user_input, response)  
                     update_chat_history(user_input, response, end_continue_result, wiki_chat_result)
