@@ -5,5 +5,5 @@ nltk
 pyspellchecker
 openai
 langchain
-chromadb
+chromadb==0.4.5
 sentence_transformers
