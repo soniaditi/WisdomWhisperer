@@ -9,6 +9,13 @@ __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+openai_api_key = os.getenv("OPENAI_API_KEY")
+
 import os
 import requests
 from langchain.document_loaders import TextLoader
@@ -57,10 +64,12 @@ def initialize_huggingface_components(filename, persistent_directory='./chroma_d
         return vectordb
     
 def get_openai_key_and_answer(query, vectordb):
-    success, open_ai_key = get_openai_key()
+    # success, open_ai_key = get_openai_key()
 
-    if success:
-        llm = OpenAI(openai_api_key=open_ai_key)
+    # if success:
+    #     llm = OpenAI(openai_api_key=open_ai_key)
+    if openai_api_key:
+        llm = OpenAI(openai_api_key=openai_api_key)
 
         new_line = '\n'
         template = f"Use the following pieces of context to answer truthfully.{new_line}If the context does not provide the truthful answer, make the answer as truthful as possible.{new_line}Use 15 words maximum. Keep the response as concise as possible.{new_line}{{context}}{new_line}Question: {{question}}{new_line}Response: "
