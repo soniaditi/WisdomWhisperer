@@ -9,10 +9,10 @@ __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
-load_dotenv(dotenv_path="ai.env")
+# load_dotenv(dotenv_path="ai.env")
 
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
